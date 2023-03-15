@@ -1,0 +1,57 @@
+﻿@model Sellers
+
+@{
+    ViewData["Title"] = "Add a new Seller";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Details For @Model.SellerName</h1>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+
+
+
+                <div class="form-group text-center">
+
+                    <img id="ProfilePicturePreview" style="max-width:150px" />
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="logo" class="control-label"></label>
+                    <input asp-for="logo" class="form-control" style="margin-bottom:20px" readonly />
+                    <span asp-validation-for="logo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SellerName" class="control-label"></label>
+                    <input asp-for="SellerName" class="form-control" style="margin-bottom:20px" readonly />
+                    <span asp-validation-for="SellerName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" style="margin-bottom:20px" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <a class="btn btn-outline-success float-end" asp-action="Edit" asp-route-id="@Model.Id"> Edit </a>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#logo").val();
+        })
+    </script>
+}
