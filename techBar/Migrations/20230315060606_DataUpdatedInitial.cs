@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace techBar.Migrations
 {
     /// <inheritdoc />
-    public partial class AddingChnages : Migration
+    public partial class DataUpdatedInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

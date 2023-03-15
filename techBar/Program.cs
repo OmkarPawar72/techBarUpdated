@@ -20,7 +20,7 @@ internal class Program
         builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<IManufacturerService, ManufacturerService>();
         builder.Services.AddScoped<ISellersService, SellersService>();
-
+		builder.Services.AddScoped<IProductsCategoryService,ProductsCategoryService>();
 
         var app = builder.Build();
 

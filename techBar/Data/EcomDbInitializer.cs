@@ -155,8 +155,8 @@ namespace techBar.Data
                             ImageURL = "https://m.media-amazon.com/images/I/81KYXXysrUL._AC_SX679_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
-                            SellerId = 3,
-                            ManufacturerId = 3,
+                            SellerId = 2,
+                            ManufacturerId = 5,
                             ProductCategory = Enums.ProductCategory.ComputerAccessories
                         },
 						new ProductsCategory()
@@ -167,8 +167,8 @@ namespace techBar.Data
                             ImageURL = "https://m.media-amazon.com/images/I/81gw2b5Lo4L._AC_SX679_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
-                            SellerId = 3,
-                            ManufacturerId = 3,
+                            SellerId = 1,
+                            ManufacturerId = 1,
                             ProductCategory = Enums.ProductCategory.ComputerAccessories
                         },
 						new ProductsCategory()
@@ -179,8 +179,8 @@ namespace techBar.Data
                             ImageURL = "https://m.media-amazon.com/images/I/61Sl+xoVHoL._AC_SX679_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
-                            SellerId = 3,
-                            ManufacturerId = 3,
+                            SellerId = 4,
+                            ManufacturerId = 2,
                             ProductCategory = Enums.ProductCategory.ComputerAccessories
                         },
 						new ProductsCategory()
@@ -191,8 +191,8 @@ namespace techBar.Data
                             ImageURL = "https://m.media-amazon.com/images/I/71kBlSKi3eL._AC_SX679_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
-                            SellerId = 3,
-                            ManufacturerId = 3,
+                            SellerId = 5,
+                            ManufacturerId = 4,
                             ProductCategory = Enums.ProductCategory.ComputerAccessories
                         },
 						new ProductsCategory()
@@ -203,8 +203,8 @@ namespace techBar.Data
                             ImageURL = "https://www.interdiscount.ch/static-shops/products/720/d0f7e052cddc1185494fa4d2037f9122f3e5.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
-                            SellerId = 3,
-                            ManufacturerId = 3,
+                            SellerId = 1,
+                            ManufacturerId = 1,
                             ProductCategory = Enums.ProductCategory.ComputerAccessories
                         }
 					});

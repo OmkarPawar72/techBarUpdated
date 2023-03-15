@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
 using techBar.Models;
+
 
 namespace techBar.Data.Base
 {
@@ -34,10 +36,17 @@ namespace techBar.Data.Base
             return result;
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            query = includeProperties.Aggregate(query, (current, includeProperties) => current.Include(includeProperties));
+            return await query.ToListAsync();
+        }
+
         public async Task<T> GetByIdAsync(int id)
         {
             var result = await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
-            return result;
+            return result; 
         }
 
         public Task SaveChangesAsync()

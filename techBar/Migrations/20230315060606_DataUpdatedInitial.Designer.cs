@@ -12,8 +12,8 @@ using techBar.Data;
 namespace techBar.Migrations
 {
     [DbContext(typeof(EcomDbContext))]
-    [Migration("20230314233455_AddingChnages")]
-    partial class AddingChnages
+    [Migration("20230315060606_DataUpdatedInitial")]
+    partial class DataUpdatedInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
