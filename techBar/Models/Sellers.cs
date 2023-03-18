@@ -9,16 +9,16 @@ namespace techBar.Models
 		public int Id { get; set; }
 
 		[Display(Name = "Profile Logo")]
-		public string logo { get; set; }
+		public string? logo { get; set; }
 
         [Display(Name = "Name")]
-        public string SellerName { get; set; }
+        public string? SellerName { get; set; }
 
         [Display(Name = "Description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
 		//Relationships
 
-		public List<ProductsCategory> ProductsCategories { get; set; }
+		public List<ProductsCategory>? ProductsCategories { get; set; }
 	}
 }

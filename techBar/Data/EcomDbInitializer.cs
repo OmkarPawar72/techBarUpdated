@@ -99,7 +99,7 @@ namespace techBar.Data
 						{
 							FullName = "Apple",
 							Bio = "One of oldest and leading tech company",
-							ProfilePitctureURL = "https://images.unsplash.com/photo-1614312385003-dcea7b8b6ab6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1326&q=80"
+							ProfilePitctureURL = "https://m.media-amazon.com/images/I/91V-6BzRJYL._AC_SX679_.jpg"
 
                         },
 						new Manufacturer()
@@ -124,7 +124,7 @@ namespace techBar.Data
 						{
 							FullName = "Google",
 							Bio = "Make life easier with a little help from our products.",
-							ProfilePitctureURL = "https://companieslogo.com/img/orig/GOOG-0ed88f7c.png?t=1633218227"
+							ProfilePitctureURL = "https://m.media-amazon.com/images/I/816gMjg908L._AC_SX679_.jpg"
                         }
                     });
 					context.SaveChanges();
@@ -152,7 +152,7 @@ namespace techBar.Data
                             Name = "Google Pixel 6",
                             Description = "First 5G phone, Google Pixel 6",
                             Price = 899.97,
-                            ImageURL = "https://m.media-amazon.com/images/I/81KYXXysrUL._AC_SX679_.jpg",
+                            ImageURL = "https://m.media-amazon.com/images/I/816gMjg908L._AC_SX679_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
                             SellerId = 2,
@@ -164,7 +164,7 @@ namespace techBar.Data
                             Name = "Apple Watch Ultra",
                             Description = "WHY APPLE WATCH ULTRA",
                             Price = 999.99,
-                            ImageURL = "https://m.media-amazon.com/images/I/81gw2b5Lo4L._AC_SX679_.jpg",
+                            ImageURL = "https://m.media-amazon.com/images/I/91V-6BzRJYL._AC_SX679_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
                             SellerId = 1,

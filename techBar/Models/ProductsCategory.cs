@@ -10,13 +10,13 @@ namespace techBar.Models
 		[Key]
 		public int Id { get; set; }
 
-		public string Name { get; set; }	
+		public string? Name { get; set; }	
 
-		public string Description { get; set; }
+		public string? Description { get; set; }
 
 		public double Price { get; set; }
 
-		public string ImageURL { get; set; }
+		public string? ImageURL { get; set; }
 
 		public DateTime StartDate { get; set; }
 
@@ -25,20 +25,20 @@ namespace techBar.Models
 		public ProductCategory ProductCategory { get; set; }
 
 		//Relationship
-		public List<Product_Category> Products_Categories { get; set; }
+		public List<Product_Category>? Products_Categories { get; set; }
 		 
 		//Sellers
 
 		public int SellerId { get; set; }
 
 		[ForeignKey("SellerId")]
-		public Sellers Sellers { get; set; }
+		public Sellers? Sellers { get; set; }
 
 		//Manufacturer
 
 		public int ManufacturerId { get; set; }
 
 		[ForeignKey("ManufacturerId")]
-		public Manufacturer Manufacturer { get; set; }
+		public Manufacturer? Manufacturer { get; set; }
 	}
 }
