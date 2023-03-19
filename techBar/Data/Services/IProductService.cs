@@ -5,5 +5,6 @@ namespace techBar.Data.Services
 {
     public interface IProductService: IEntityBaseRepository<Product>
     {
+
     }
 }

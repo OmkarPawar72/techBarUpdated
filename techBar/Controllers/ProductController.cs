@@ -30,7 +30,7 @@ namespace techBar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public Task<IActionResult> Create([Bind("Id,ProfilePitctureURL,FullName,Bio")] Product product)
+        public Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
             {

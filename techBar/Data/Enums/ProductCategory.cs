@@ -5,7 +5,7 @@
         ComputerAccessories,
         CellPhoneAccessories,
         CameraAccessories,
-        Wearable
-
+        Wearable,
+        HomeAccessories
     }
 }

@@ -5,6 +5,9 @@ namespace techBar.Models
 {
     public class NewProductsCategoryVM
     {
+
+        public int Id { get; set; }
+
         [Display(Name ="Product Name")]
         [Required(ErrorMessage ="Name is required")]
         public string? Name { get; set; }
