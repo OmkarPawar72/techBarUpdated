@@ -32,13 +32,13 @@ namespace techBar.Models
 		public int SellerId { get; set; }
 
 		[ForeignKey("SellerId")]
-		public Sellers? Sellers { get; set; }
+		public Sellers Sellers { get; set; }
 
 		//Manufacturer
 
 		public int ManufacturerId { get; set; }
 
 		[ForeignKey("ManufacturerId")]
-		public Manufacturer? Manufacturer { get; set; }
+		public Manufacturer Manufacturer { get; set; }
 	}
 }

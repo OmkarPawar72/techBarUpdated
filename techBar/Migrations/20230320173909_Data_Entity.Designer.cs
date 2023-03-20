@@ -12,8 +12,8 @@ using techBar.Data;
 namespace techBar.Migrations
 {
     [DbContext(typeof(EcomDbContext))]
-    [Migration("20230320033307_Order_And_Order_Items_Added")]
-    partial class OrderAndOrderItemsAdded
+    [Migration("20230320173909_Data_Entity")]
+    partial class DataEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,6 +207,31 @@ namespace techBar.Migrations
                     b.ToTable("Sellers");
                 });
 
+            modelBuilder.Entity("techBar.Models.ShoppingCartItem", b =>
+                {
+                    b.Property<int>("ShoppingcartitemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShoppingcartitemId"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShoppingCartId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ShoppingcartitemId");
+
+                    b.HasIndex("ProductsCategoryId");
+
+                    b.ToTable("ShoppingCartItems");
+                });
+
             modelBuilder.Entity("techBar.Models.OrderItem", b =>
                 {
                     b.HasOne("techBar.Models.Orders", "orders")
@@ -262,6 +287,17 @@ namespace techBar.Migrations
                     b.Navigation("Manufacturer");
 
                     b.Navigation("Sellers");
+                });
+
+            modelBuilder.Entity("techBar.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("techBar.Models.ProductsCategory", "ProductsCategory")
+                        .WithMany()
+                        .HasForeignKey("ProductsCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductsCategory");
                 });
 
             modelBuilder.Entity("techBar.Models.Manufacturer", b =>

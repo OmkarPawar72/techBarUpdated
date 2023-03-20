@@ -38,7 +38,7 @@ namespace techBar.Controllers
         //GET: ProductsCategory/Details/1
         public async Task<IActionResult>Details(int id)
         {
-            var productDetails = await _service.GetProductsCategoryIdAsysnc(id);
+            var productDetails = await _service.GetCategoryIdAsysnc(id);
             return View(productDetails);
         }
 
@@ -72,15 +72,14 @@ namespace techBar.Controllers
         }
 
         //GET : ProductsCategory/Edit/1
+
         public async Task<IActionResult> Edit(int id)
         {
-            var details = await _service.GetProductsCategoryIdAsysnc(id);
+            var details = await _service.GetCategoryIdAsysnc(id);
             if (details == null) 
             {
                 return View("NotFound");
             };
-
-
 
             var response = new NewProductsCategoryVM()
             {
@@ -125,6 +124,7 @@ namespace techBar.Controllers
 
                 return View(productsCategoryVM);
             }
+            //Error Causing here.
             await _service.UpdateProductAsync(productsCategoryVM);
             return RedirectToAction(nameof(Index));
         }

@@ -17,7 +17,7 @@ namespace techBar.Data
 				pc.CategoryId
 			});
 
-			modelBuilder.Entity<Product_Category>().HasOne(c=>c.ProductsCategory).WithMany(pc=>pc.Products_Categories)
+			modelBuilder.Entity<Product_Category>().HasOne(c=>c.ProductsCategory).WithMany(pc => pc.Products_Categories)
 				.HasForeignKey(c=>c.CategoryId);
 
 			modelBuilder.Entity<Product_Category>().HasOne(c => c.Product).WithMany(pc => pc.Product_Categories)

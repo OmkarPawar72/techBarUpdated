@@ -7,7 +7,7 @@ namespace techBar.Data.Services
 {
     public interface IProductsCategoryService : IEntityBaseRepository<ProductsCategory>
     {
-        Task<ProductsCategory> GetProductsCategoryIdAsysnc(int id);
+        Task<ProductsCategory> GetCategoryIdAsysnc(int id);
         Task<NewProductsDropdownVM> GetNewProductsDropdownsValues();
         Task AddNewProductCategoryAsync(NewProductsCategoryVM data);
         Task UpdateProductAsync (NewProductsCategoryVM data);

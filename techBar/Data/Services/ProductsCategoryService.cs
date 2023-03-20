@@ -57,7 +57,7 @@ namespace techBar.Data.Services
             return response;
         }
 
-        public async Task<ProductsCategory> GetProductsCategoryIdAsysnc(int id)
+        public async Task<ProductsCategory> GetCategoryIdAsysnc(int id)
         {
             var productsCategories = await _context.ProductCategories
                 .Include(c => c.Sellers)
@@ -102,6 +102,8 @@ namespace techBar.Data.Services
                 };
                 await _context.Product_Categories.AddAsync(newProductCategory);
             }
+
+            //Error is here
             await _context.SaveChangesAsync();
         }
     }
