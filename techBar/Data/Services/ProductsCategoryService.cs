@@ -69,9 +69,9 @@ namespace techBar.Data.Services
 
         }
 
-        public async Task UpdateNewProductCategoryAsync(NewProductsCategoryVM data)
+        public async Task UpdateProductAsync(NewProductsCategoryVM data)
         {
-            var dbProductCategory = await _context.ProductCategories.FirstOrDefaultAsync(n=>n.Id==data.Id);
+            var dbProductCategory = await _context.ProductCategories.FirstOrDefaultAsync(n => n.Id == data.Id);
 
             if(dbProductCategory != null)
             {
@@ -79,11 +79,11 @@ namespace techBar.Data.Services
                 dbProductCategory.Name = data.Name;
                 dbProductCategory.Description = data.Description;
                 dbProductCategory.ImageURL = data.ImageURL;
-                dbProductCategory.SellerId = (int)data.SellerId;
+                dbProductCategory.SellerId = data.SellerId;
                 dbProductCategory.StartDate = data.StartDate;
                 dbProductCategory.EndDate = data.EndDate;
                 dbProductCategory.ProductCategory = data.ProductCategory;
-                dbProductCategory.ManufacturerId = (int)data.ManufacturerId;
+                dbProductCategory.ManufacturerId = data.ManufacturerId;
                 await _context.SaveChangesAsync();
             }
 

@@ -28,7 +28,7 @@ namespace techBar.Data
 		}
 		public DbSet<Product> Products { get; set; }
 
-		public DbSet<ProductsCategory> ProductCategories { get; set; }
+		public DbSet<ProductsCategory>? ProductCategories { get; set; }
 
 		public DbSet<Product_Category> Product_Categories { get; set; }
 

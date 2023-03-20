@@ -22,6 +22,19 @@ namespace techBar.Controllers
             return View(allProducts);
         }
 
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allProducts = await _service.GetAllAsync(n => n.Sellers);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filterResult = allProducts.Where(n=>n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                return View("Index",filterResult);
+            }
+
+            return View("Index",allProducts);
+        }
+
         //GET: ProductsCategory/Details/1
         public async Task<IActionResult>Details(int id)
         {
@@ -61,22 +74,27 @@ namespace techBar.Controllers
         //GET : ProductsCategory/Edit/1
         public async Task<IActionResult> Edit(int id)
         {
-            var productCategoryDetails = await _service.GetProductsCategoryIdAsysnc(id);
-            if (productCategoryDetails == null) return View("NotFound");
+            var details = await _service.GetProductsCategoryIdAsysnc(id);
+            if (details == null) 
+            {
+                return View("NotFound");
+            };
 
 
 
             var response = new NewProductsCategoryVM()
             {
-                Id = productCategoryDetails.Id,  
-                Name = productCategoryDetails.Name,
-                Description = productCategoryDetails.Description,
-                Price = productCategoryDetails.Price,
-                ImageURL = productCategoryDetails.ImageURL,
-                ProductCategory = productCategoryDetails.ProductCategory,
-                SellerId = productCategoryDetails.SellerId,
-                ManufacturerId = productCategoryDetails.ManufacturerId,
-                ProductsIds = productCategoryDetails.Products_Categories.Select(n => n.ProductId).ToList(),
+                Id = details.Id,  
+                Name = details.Name,
+                Description = details.Description,
+                Price = details.Price,
+                StartDate= details.StartDate,
+                EndDate= details.EndDate,
+                ImageURL = details.ImageURL,
+                ProductCategory = details.ProductCategory,
+                SellerId = details.SellerId,
+                ManufacturerId = details.ManufacturerId,
+                ProductsIds = details.Products_Categories.Select(n => n.ProductId).ToList()
             };
 
 
@@ -86,7 +104,7 @@ namespace techBar.Controllers
             ViewBag.Manufacturer = new SelectList(productDropdownData.Manufacturers, "Id", "FullName");
             ViewBag.Product = new SelectList(productDropdownData.Products, "Id", "FullName");
 
-            return View();
+            return View(response);
         }
 
         [HttpPost]
@@ -107,7 +125,7 @@ namespace techBar.Controllers
 
                 return View(productsCategoryVM);
             }
-            await _service.UpdateNewProductCategoryAsync(productsCategoryVM);
+            await _service.UpdateProductAsync(productsCategoryVM);
             return RedirectToAction(nameof(Index));
         }
     }

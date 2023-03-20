@@ -10,6 +10,6 @@ namespace techBar.Data.Services
         Task<ProductsCategory> GetProductsCategoryIdAsysnc(int id);
         Task<NewProductsDropdownVM> GetNewProductsDropdownsValues();
         Task AddNewProductCategoryAsync(NewProductsCategoryVM data);
-        Task UpdateNewProductCategoryAsync(NewProductsCategoryVM data);
+        Task UpdateProductAsync (NewProductsCategoryVM data);
     }
 }
