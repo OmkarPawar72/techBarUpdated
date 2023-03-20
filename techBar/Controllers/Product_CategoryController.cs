@@ -74,7 +74,7 @@ namespace techBar.Controllers
         //GET : ProductsCategory/Edit/1
         public async Task<IActionResult> Edit(int id)
         {
-            ProductsCategory details = await _service.GetProductsCategoryIdAsysnc(id);
+            var details = await _service.GetProductsCategoryIdAsysnc(id);
             if (details == null) 
             {
                 return View("NotFound");
