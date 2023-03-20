@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using techBar.Data;
+using techBar.Data.Cart;
 using techBar.Data.Services;
 
 internal class Program
@@ -22,6 +23,12 @@ internal class Program
         builder.Services.AddScoped<ISellersService, SellersService>();
 		builder.Services.AddScoped<IProductsCategoryService,ProductsCategoryService>();
 
+		//Configure 
+		builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+		builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+		builder.Services.AddSession();
+
         var app = builder.Build();
 
 		// Configure the HTTP request pipeline.
@@ -36,6 +43,7 @@ internal class Program
 		app.UseStaticFiles();
 
 		app.UseRouting();
+		app.UseSession();
 
 		app.UseAuthorization();
 

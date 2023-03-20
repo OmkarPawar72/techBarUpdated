@@ -28,7 +28,7 @@ namespace techBar.Data
 		}
 		public DbSet<Product> Products { get; set; }
 
-		public DbSet<ProductsCategory>? ProductCategories { get; set; }
+		public DbSet<ProductsCategory> ProductCategories { get; set; }
 
 		public DbSet<Product_Category> Product_Categories { get; set; }
 
@@ -36,6 +36,12 @@ namespace techBar.Data
 
 		public DbSet<Manufacturer> Manufacturers { get; set; }
 
+		//Orders related tables
 
+		public DbSet<Orders> Orders { get; set; }
+
+		public DbSet<OrderItem> OrderItems { get; set; }
+
+		public DbSet<ShoppingCartItem> ShoppingCartItems { get; set;}
 	}
 }
