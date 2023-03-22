@@ -2,19 +2,20 @@
 @using techBar.Data.Enums;
 
 @{
-    ViewData["Title"] = "Update a new Product";
+    ViewData["Title"] = "Update Product";
 }
 
 <div class="row">
     <div class="col-md-8 offset-2">
         <p>
-            <h4>Update a new product</h4>
+            <h4>Update product</h4>
         </p>
 
         <div class="row">
             <div class="col-md-8 offset-2">
 
                 <form asp-action="Edit">
+                    
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row">
@@ -109,7 +110,7 @@
 
 @section Scripts{
     <script>
-        $(document).ready(function (){
+        $(document.ready(function (){
             var output = document.getElementById("ImageUrlPreview");
             output.src = $("#ImageURL").val();
         })

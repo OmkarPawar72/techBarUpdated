@@ -22,12 +22,13 @@ namespace techBar.Data.Services
             {
                 Name = data.Name,
                 Description = data.Description,
+                Price = data.Price,
                 ImageURL = data.ImageURL,
-                SellerId = (int)data.SellerId,
+                SellerId = data.SellerId,
                 StartDate = data.StartDate,
                 EndDate= data.EndDate,
                 ProductCategory=data.ProductCategory,
-                ManufacturerId= (int)data.ManufacturerId
+                ManufacturerId= data.ManufacturerId
             };
             await _context.ProductCategories.AddAsync(newProductsCategory);
             await _context.SaveChangesAsync();
@@ -57,39 +58,40 @@ namespace techBar.Data.Services
             return response;
         }
 
-        public async Task<ProductsCategory> GetCategoryIdAsysnc(int id)
+        public async Task<ProductsCategory> GetCategoryIdAsync(int id)
         {
+            
             var productsCategories = await _context.ProductCategories
                 .Include(c => c.Sellers)
                 .Include(p => p.Manufacturer)
                 .Include(pc => pc.Products_Categories).ThenInclude(a => a.Product)
                 .FirstOrDefaultAsync(n=>n.Id == id);
 
+            
             return productsCategories;
 
         }
 
         public async Task UpdateProductAsync(NewProductsCategoryVM data)
         {
-            var dbProductCategory = await _context.ProductCategories.FirstOrDefaultAsync(n => n.Id == data.Id);
-
-            if(dbProductCategory != null)
+            var dbCategory = await _context.ProductCategories.FirstOrDefaultAsync(n=>n.Id==data.Id);
+            if (dbCategory != null)
             {
-
-                dbProductCategory.Name = data.Name;
-                dbProductCategory.Description = data.Description;
-                dbProductCategory.ImageURL = data.ImageURL;
-                dbProductCategory.SellerId = data.SellerId;
-                dbProductCategory.StartDate = data.StartDate;
-                dbProductCategory.EndDate = data.EndDate;
-                dbProductCategory.ProductCategory = data.ProductCategory;
-                dbProductCategory.ManufacturerId = data.ManufacturerId;
+                dbCategory.Name = data.Name;
+                dbCategory.Description = data.Description;
+                dbCategory.ImageURL = data.ImageURL;
+                dbCategory.SellerId = data.SellerId;
+                dbCategory.StartDate = data.StartDate;
+                dbCategory.EndDate = data.EndDate;
+                dbCategory.ProductCategory = data.ProductCategory;
+                dbCategory.ManufacturerId = data.ManufacturerId;
                 await _context.SaveChangesAsync();
             }
 
-            //Remove exesting Products Category
-            var existingProductsCategoryDb = _context.Product_Categories.Where(n=>n.CategoryId==data.Id).ToList();
-            _context.Product_Categories.RemoveRange(existingProductsCategoryDb);
+            //Remove exesting products 
+
+            var exestingPrdoductDb=_context.Product_Categories.Where(n=>n.ProductId==data.Id).ToList(); 
+            _context.Product_Categories.RemoveRange(exestingPrdoductDb);
             await _context.SaveChangesAsync();
 
             //Add ProductsCategory Products 
@@ -102,8 +104,6 @@ namespace techBar.Data.Services
                 };
                 await _context.Product_Categories.AddAsync(newProductCategory);
             }
-
-            //Error is here
             await _context.SaveChangesAsync();
         }
     }

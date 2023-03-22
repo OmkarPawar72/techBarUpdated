@@ -22,6 +22,7 @@ internal class Program
         builder.Services.AddScoped<IManufacturerService, ManufacturerService>();
         builder.Services.AddScoped<ISellersService, SellersService>();
 		builder.Services.AddScoped<IProductsCategoryService,ProductsCategoryService>();
+		builder.Services.AddScoped<IOrdersService, OrdersService>();
 
 		//Configure 
 		builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

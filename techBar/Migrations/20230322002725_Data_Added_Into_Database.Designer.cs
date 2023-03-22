@@ -12,8 +12,8 @@ using techBar.Data;
 namespace techBar.Migrations
 {
     [DbContext(typeof(EcomDbContext))]
-    [Migration("20230320173909_Data_Entity")]
-    partial class DataEntity
+    [Migration("20230322002725_Data_Added_Into_Database")]
+    partial class DataAddedIntoDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,11 +87,13 @@ namespace techBar.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<int>("Email")
-                        .HasColumnType("int");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrderId");
 

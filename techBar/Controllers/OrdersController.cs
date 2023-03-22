@@ -12,12 +12,21 @@ namespace techBar.Controllers
 
         private readonly ShoppingCart _shoppingCart;
 
-        public OrdersController(IProductsCategoryService productsCategoryService, ShoppingCart shoppingCart)
+        private readonly IOrdersService _ordersService;
+
+        public OrdersController(IProductsCategoryService productsCategoryService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _productsCategoryService = productsCategoryService; 
             _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
         }
 
+        public async Task <IActionResult> Index()
+        {
+            string userId = "";
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
 
 
         public IActionResult ShoppingCart()
@@ -36,7 +45,7 @@ namespace techBar.Controllers
 
         public async Task<IActionResult> AddItemToShoppingCart(int id)
         {
-            var item = await _productsCategoryService.GetCategoryIdAsysnc(id);
+            var item = await _productsCategoryService.GetCategoryIdAsync(id);
 
             if (item != null)
             {
@@ -46,13 +55,26 @@ namespace techBar.Controllers
         }
         public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
         {
-            var item = await _productsCategoryService.GetCategoryIdAsysnc(id);
+            var item = await _productsCategoryService.GetCategoryIdAsync(id);
 
             if (item != null)
             {
                 _shoppingCart.RemoveItemFromCart(item);
+                
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAddress = "";
+
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            await _shoppingCart.ClearShoppingCartAsync();
+            return View("OrderCompleted");
+        }
+
     }
 }

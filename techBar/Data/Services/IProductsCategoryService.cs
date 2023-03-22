@@ -5,9 +5,9 @@ using techBar.Models;
 
 namespace techBar.Data.Services
 {
-    public interface IProductsCategoryService : IEntityBaseRepository<ProductsCategory>
+    public interface IProductsCategoryService : IEntityBaseRepository <ProductsCategory>
     {
-        Task<ProductsCategory> GetCategoryIdAsysnc(int id);
+        Task<ProductsCategory> GetCategoryIdAsync(int id);
         Task<NewProductsDropdownVM> GetNewProductsDropdownsValues();
         Task AddNewProductCategoryAsync(NewProductsCategoryVM data);
         Task UpdateProductAsync (NewProductsCategoryVM data);

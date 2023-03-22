@@ -18,6 +18,7 @@ namespace techBar.Models
         public ProductsCategory Productscategory { get; set; }
 
         public int OrderId { get; set; }
+
         [ForeignKey("OrderId")]
         public Orders orders { get; set; }
     }

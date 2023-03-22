@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using techBar.Data;
 using techBar.Data.Services;
@@ -38,7 +39,7 @@ namespace techBar.Controllers
         //GET: ProductsCategory/Details/1
         public async Task<IActionResult>Details(int id)
         {
-            var productDetails = await _service.GetCategoryIdAsysnc(id);
+            var productDetails = await _service.GetCategoryIdAsync(id);
             return View(productDetails);
         }
 
@@ -72,10 +73,10 @@ namespace techBar.Controllers
         }
 
         //GET : ProductsCategory/Edit/1
-
+        //[HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id)
         {
-            var details = await _service.GetCategoryIdAsysnc(id);
+            var details = await _service.GetCategoryIdAsync(id);
             if (details == null) 
             {
                 return View("NotFound");
@@ -104,6 +105,7 @@ namespace techBar.Controllers
             ViewBag.Product = new SelectList(productDropdownData.Products, "Id", "FullName");
 
             return View(response);
+            
         }
 
         [HttpPost]

@@ -9,7 +9,5 @@
 		public int CategoryId { get; set; }
 
 		public ProductsCategory ProductsCategory { get; set; }
-
-
 	}
 }
