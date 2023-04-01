@@ -4,9 +4,12 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using techBar.Data.Services;
 using techBar.Models;
+using Microsoft.AspNetCore.Authorization;
+using techBar.Data.Static;
 
 namespace techBar.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ProductController : Controller
     {
         private readonly IProductService _service;
@@ -16,12 +19,14 @@ namespace techBar.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
             return View(data);
         }
 
+        
         //Get: Product/Create
         public IActionResult Create()
         {
@@ -41,7 +46,7 @@ namespace techBar.Controllers
         }
 
         //Get: Product/Details/1
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var productDetails = await _service.GetByIdAsync(id);

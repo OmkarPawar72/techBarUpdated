@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using techBar.Data.Cart;
 using techBar.Data.Services;
+using techBar.Data.Static;
 using techBar.Data.ViewModels;
 using techBar.Models;
 
 namespace techBar.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IProductsCategoryService _productsCategoryService;
@@ -23,8 +27,9 @@ namespace techBar.Controllers
 
         public async Task <IActionResult> Index()
         {
-            string userId = "";
-            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId,userRole);
             return View(orders);
         }
 
@@ -34,6 +39,7 @@ namespace techBar.Controllers
             
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
+
             var response = new ShoppingCartVM()
             {
                 ShoppingCart = _shoppingCart,
@@ -43,7 +49,7 @@ namespace techBar.Controllers
             return View(response);
         }
 
-        public async Task<IActionResult> AddItemToShoppingCart(int id)
+        public async Task<RedirectToActionResult> AddItemToShoppingCart(int id)
         {
             var item = await _productsCategoryService.GetCategoryIdAsync(id);
 
@@ -53,14 +59,13 @@ namespace techBar.Controllers
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
-        public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
+        public async Task<RedirectToActionResult> RemoveItemFromShoppingCart(int id)
         {
             var item = await _productsCategoryService.GetCategoryIdAsync(id);
 
             if (item != null)
             {
                 _shoppingCart.RemoveItemFromCart(item);
-                
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
@@ -68,11 +73,14 @@ namespace techBar.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userId = "";
-            string userEmailAddress = "";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
 
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
+
+            
+
             return View("OrderCompleted");
         }
 

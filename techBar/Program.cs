@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using techBar.Data;
 using techBar.Data.Cart;
 using techBar.Data.Services;
+using techBar.Models;
 
 internal class Program
 {
@@ -24,9 +27,19 @@ internal class Program
 		builder.Services.AddScoped<IProductsCategoryService,ProductsCategoryService>();
 		builder.Services.AddScoped<IOrdersService, OrdersService>();
 
+
 		//Configure 
 		builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 		builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+		//Autentication and authorization
+		builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<EcomDbContext>();
+		builder.Services.AddMemoryCache();
+		builder.Services.AddSession();
+		builder.Services.AddAuthentication(options =>
+		{
+			options.DefaultScheme=CookieAuthenticationDefaults.AuthenticationScheme;
+		});
 
 		builder.Services.AddSession();
 
@@ -46,6 +59,10 @@ internal class Program
 		app.UseRouting();
 		app.UseSession();
 
+		//Authentication & Authorization
+		app.UseAuthentication();
+		app.UseAuthorization();
+
 		app.UseAuthorization();
 
 		app.UseAuthentication();
@@ -56,6 +73,7 @@ internal class Program
 
 		//Seed datbase
 		EcomDbInitializer.Seed(app);
+		EcomDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
 		app.Run();
 	}

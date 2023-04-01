@@ -6,6 +6,6 @@ namespace techBar.Data.Services
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress);
 
-        Task<List<Orders>> GetOrdersByUserIdAsync(string userId);
+        Task<List<Orders>> GetOrdersByUserIdAndRoleAsync(string userId,string userRole);
     }
 }

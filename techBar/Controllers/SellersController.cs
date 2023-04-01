@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using techBar.Data;
 using techBar.Data.Services;
+using techBar.Data.Static;
 using techBar.Models;
 
 namespace techBar.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class SellersController : Controller
     {
         private readonly ISellersService _service;
@@ -15,6 +18,7 @@ namespace techBar.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allSellers = await _service.GetAllAsync();
@@ -44,7 +48,7 @@ namespace techBar.Controllers
         //****************************************************************************************************************************
 
         //Get: Sellers/Details/1
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var sellersDetails = await _service.GetByIdAsync(id);

@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using techBar.Models;
 
 namespace techBar.Data
 {
-	public class EcomDbContext : DbContext
+	public class EcomDbContext : IdentityDbContext<ApplicationUser>
 	{
 		public EcomDbContext(DbContextOptions<EcomDbContext> options) : base(options)
 		{
+
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -27,20 +27,23 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ProductsCategory" aps-action="Index"><i class="bi bi-product"></i>Products</a>
-                        </li>
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: none; color: black; border:none">
-                                <i class="bi bi-gear"></i>Management
-                            </a>
+                        
 
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Sellers" asp-action="Index"><i class="bi bi-person-badge"></i>Sellers</a></li>
-                                <li><a class="dropdown-item" asp-controller="Manufacturer" asp-action="Index"><i class="bi bi-building"></i>Manufacturer</a></li>
-                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index"><i class="bi bi-basket-fill"></i>Product</a></li>
-                            </ul>
-                        </div>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: none; color: black; border:none">
+                                    <i class="bi bi-gear"></i>Management
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Sellers" asp-action="Index"><i class="bi bi-person-badge"></i>Sellers</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Manufacturer" asp-action="Index"><i class="bi bi-building"></i>Manufacturer</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Product" asp-action="Index"><i class="bi bi-basket-fill"></i>Product</a></li>
+                                </ul>
+                            </div>
+                        }
+                        
                     </ul>
                     <form class="d-none d-md-inline-block form-check-inline ms-auto me-0 me-md-3 my-md-0" style="padding-right: 25px;" asp-controller="ProductsCategory" asp-action="Filter">
                         <div class="input-group">
@@ -53,21 +56,7 @@
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
 
-                    @*User Profile Section*@
-
-                    <div class="dropdown">
-                        <a class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" id="profile-btn" data-toggle="dropdown"
-                                aria-expanded="false">
-                        <i class="bi bi-person-badge"></i> Hello User
-                    </a>
-                        <ul class="dropdown-menu" aria-labelledby="profile-btn">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                                    <i class="bi bi-list"></i>Orders
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <partial name="_Identity.cshtml"/>
 
                 </div>
             </div>

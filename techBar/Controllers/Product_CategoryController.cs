@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using techBar.Data;
 using techBar.Data.Services;
+using techBar.Data.Static;
 using techBar.Models;
 
 namespace techBar.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ProductsCategoryController : Controller
     {
         private readonly IProductsCategoryService _service;
@@ -16,20 +19,21 @@ namespace techBar.Controllers
         {
             _service = productsCategoryService;
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allProducts = await _service.GetAllAsync(n=>n.Sellers);
             return View(allProducts);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
         {
             var allProducts = await _service.GetAllAsync(n => n.Sellers);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filterResult = allProducts.Where(n=>n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                var filterResult = allProducts.Where(n=>n.Name.ToLower().Contains(searchString.ToLower()) || n.Description.ToLower().Contains(searchString.ToLower())).ToList();
                 return View("Index",filterResult);
             }
 
@@ -37,6 +41,7 @@ namespace techBar.Controllers
         }
 
         //GET: ProductsCategory/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult>Details(int id)
         {
             var productDetails = await _service.GetCategoryIdAsync(id);

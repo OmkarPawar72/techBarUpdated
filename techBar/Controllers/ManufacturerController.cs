@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using techBar.Data;
 using techBar.Data.Services;
+using techBar.Data.Static;
 using techBar.Models;
 
 namespace techBar.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
     public class ManufacturerController : Controller
     {
         private readonly IManufacturerService _service;
@@ -14,7 +17,7 @@ namespace techBar.Controllers
         {
             _service = service;
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allManufacturer = await _service.GetAllAsync();
@@ -22,7 +25,7 @@ namespace techBar.Controllers
         }
 
         //GET: manufacturerDetails/details/1
-
+        
         public async Task<IActionResult> Details(int id)
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);
